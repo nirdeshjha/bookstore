@@ -1,0 +1,409 @@
+SCHEMA
+
+book
+    id
+    title : string
+    author : string
+    date-of-publish : date
+    age-range : number
+    genre : [string]
+    no-of-copy : number
+    price : number
+
+user
+    id
+    username : string
+    name : string
+    password : 
+    email : email
+
+rented
+    user_id : 
+    book_id : []
+    renting_date : []
+    returning_date: []
+    price: []
+
+history
+    user_id:
+    renting_date: []
+    returning_date: []
+    book_id: []
+    price: []
+
+
+endpoint urls
+login form                        GET     /api 
+fill form                         POST    /api/my-details    
+home page of user                 GET     /api/home 
+search a book                     GET     /api/home/books/search-result
+rent a book                       GET     /api/home/books/:bookid/rented 
+return a book                     GET     /api/home/books/:bookid/returned
+num of books based on query       GET     /api/home/total-number-of-books?genre=0&rented=0&author=q.......
+num of specific book              GET     /api/home/:book-id?total=0&days-after-book-available=0&author=0
+inf of rented books               GET     /api/home/rented?total-rented-books=0&money-spent=0
+inf of a soecifc rented book      GET     /api/home/rented/:book-id?author=0?price=0&.......
+
+//as a admin
+take a book back from a user      GET     /api/home/:userId/books/:booksId/returned
+update based on query             PUT     /api/home/book/:book-id?price=x&genre=x&...  
+removing book                     DELETE  /api/home/book/:book-id
+logging out                       GET     /api    
+
+
+FEATURES
+1. Logging in
+2. Renting a book
+3. Updating a book
+4. search a book
+5. details of user
+6. remove a book
+7. details of rented book
+8. return a book
+
+FLOW
+1. Log in = visit webpage -> login as admin or login as user -> provide details -> logged in
+2. rent a book = log in as user -> search for book -> rent it 
+3. updating a book = log in as admin -> search for book -> update respective book
+4. search a book = log in as admin or user -> search for book
+5. details of user = log in as user -> find details
+6. remove a book = log in as admin -> search for bbok to remove -> remove book
+7. details for rented book = log in as user -> move to rented section -> get all the details about rented books
+8. return a book = log in as a user -> move to rented section -> go to specific book to return -> return book
+               or, log in as admin -> go to specific user -> find list of rented books by the user -> take that book from user
+
+
+
+API Documentation 
+1.
+    endpoint: /api
+
+    http method : GET
+
+    query params if any: NA
+    request body if any: NA
+    request headers: Accpet: text/json
+
+    all possible response
+    response code: 200 or 
+    response body: NA
+
+2.
+    endpoint: /api/my-details
+
+    http method : POST
+
+    query params if any: NA
+    request body if any: 
+        {
+            username : string
+            password : string
+        }
+    request headers:   
+        Accpet: text.html
+        from: xyz.com
+        Authorization: 
+        connection: keep alive
+    request body: NA
+
+    response code: 2xx or 4xx
+    response body: txt.html
+
+3.
+    endpoint: /api/home
+
+    http method : GET
+
+    query params if any: NA
+    request body if any: NA
+    request headers:   
+        Accpet: text.html
+        from: xyz.com
+        Authorization: 
+        connection: keep alive
+
+    response code: 2xx or 5xx
+    response body: txt.html
+
+4.
+    endpoint: /api/home
+
+    http method : GET
+
+    query params if any: NA
+    request body if any: NA
+    request headers:   
+        Accpet: text/json
+        from: xyz.com
+        Authorization: 
+        connection: keep alive
+
+    response code: 2xx or 5xx
+    response body: NA
+
+5.
+    endpoint: /api/home/books/search-result
+
+    http method : GET
+
+    query params if any: NA
+    request body if any: NA
+    request headers:   
+        Accpet: text.html
+        from: xyz.com
+        Authorization: 
+        connection: keep alive
+
+    alowed response: 
+        -> response code 200
+    response code: 
+        200 on success
+        500 on service unavialble
+    response body: 
+        {
+            genre: string
+            author name: string
+            price: string
+            no of copies: number
+        }........
+
+6. 
+
+    endpoint: /api/home/books/search-result
+
+    http method : GET
+
+    query params if any: NA
+    request body if any: NA
+    request headers:   
+        Accpet: text.html
+        from: xyz.com
+        Authorization: 
+        connection: keep alive
+
+    response code: 2xx or 5xx
+    response body: 
+        {
+            genre: string
+            author name: string
+            price: string
+            no of copies: number
+        }........
+
+7.
+
+    endpoint: /api/home/books/search-result/:bookid
+
+    http method : GET
+
+    query params if any: NA
+    request body if any: NA
+    request headers:   
+        Accpet: text.html
+        from: xyz.com
+        Authorization: 
+        connection: keep alive
+
+    response code: 2xx or 5xx
+    response body: 
+        {
+            genre: string
+            author name: string
+            price: string
+            no of copies: number
+        }
+
+8.
+
+    endpoint: /api/home/books/search-result/:bookid/rented
+
+    http method : GET
+
+    query params if any: NA
+    request body if any: NA
+    request headers:   
+        Accpet: text.html
+        from: xyz.com
+        Authorization: 
+        connection: keep alive
+
+    response code: 2xx or 5xx
+    response body: 
+        {
+            genre: string
+            author name: string
+            price: string
+            no of copies: number
+        }
+
+9. 
+    endpoint: /api/home/books/search-result/:bookid/returned
+
+    http method : GET
+
+    query params if any: NA
+    request body if any: NA
+    request headers:   
+        Accpet: text.html
+        from: xyz.com
+        Authorization: 
+        connection: keep alive
+
+    response code: 2xx or 5xx
+    response body: NA
+
+10.
+
+    endpoint: /api/home/books/search-result/:bookid/returned
+
+    http method : GET
+
+    query params if any: NA
+    request body if any: NA
+    request headers:   
+        Accpet: text.html
+        from: xyz.com
+        Authorization: 
+        connection: keep alive
+
+    response code: 2xx or 5xx
+    response body: NA
+
+11.
+
+    endpoint: /api/home/total-number-of-books?genre=0&rented=0&author=q.....
+
+    http method : GET
+
+    query params if any: 
+        genre: string;      Not mandatory
+        rented: boolean; Not mandatory
+        author: string; Not mandatory
+
+    request body if any: NA
+    request headers:   
+        Accpet: text.html
+        from: xyz.com
+        Authorization: 
+        connection: keep alive
+
+    response code: 2xx or 5xx
+    response body: 
+        {
+            genre: string
+            author name: string
+            price: string
+            no of copies: number
+        }
+
+12.
+    endpoint: /api/home/total-number-of-books?genre=0&rented=0&author=q.....
+
+    http method : GET
+
+    query params if any: 
+        genre: string;      Not mandatory
+        rented: boolean; Not mandatory
+        author: string; Not mandatory
+
+    request body if any: NA
+    request headers:   
+        Accpet: text.html
+        from: xyz.com
+        Authorization: 
+        connection: keep alive
+
+    response code: 2xx or 5xx
+    response body: 
+        {
+            genre: string
+            author name: string
+            price: string
+            no of copies: number
+        }
+
+13.
+
+    endpoint: /api/home/:book-id?total=0&days-for-book-available=0&author=0
+
+    http method : GET
+
+    query params if any: 
+        genre: string;      Not mandatory
+        rented: boolean;    Not mandatory
+        author: string;     Not mandatory
+
+    request body if any: NA
+    request headers:   
+        Accpet: text.html
+        from: xyz.com
+        Authorization: 
+        connection: keep alive
+
+    response code: 2xx or 5xx
+    response body: 
+        {
+            genre: string
+            author name: string
+            price: string
+            no of copies: number
+        }
+
+14.
+    endpoint: /api/home/book/:book-id?price=x&genre=x&...
+
+    http method : PUT
+
+    query params if any: 
+        genre: string;      Not mandatory
+        rented: boolean;    Not mandatory
+        author: string;     Not mandatory
+
+    request body if any: 
+        {
+            price=x
+            genre=x
+            .....
+        }
+    request headers:   
+        Accept: text.html
+        from: xyz.com
+        Authorization: 
+        connection: keep alive
+
+    response code: 2xx or 4xx or 5xx
+    response body: 
+        {
+            genre: string
+            author name: string
+            price: string
+            no of copies: number
+        }
+
+15.
+    endpoint: /api/home/book/:book-id
+
+    http method : DELETE
+
+    query params if any: 
+        genre: string;      Not mandatory
+        rented: boolean;    Not mandatory
+        author: string;     Not mandatory
+
+    request body if any: NA
+    request headers:   
+        Accpet: text.html
+        from: xyz.com
+        Authorization: 
+        connection: keep alive
+
+    response code: 2xx or 5xx
+    response body: 
+        {
+            genre: string
+            author name: string
+            price: string
+            no of copies: number
+        }   
+
+

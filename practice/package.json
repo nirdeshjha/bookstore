@@ -1,0 +1,14 @@
+{
+  "name": "practice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^26.2.2"
+  }
+}

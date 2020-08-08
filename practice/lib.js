@@ -8,4 +8,19 @@ module.exports.greet = function (name) {
     return 'hello ' + name;
 }
 
+module.exports.genreOfBooks = function () {
+    return ['action', 'romantic', 'comedy', 'thriller'];
+}
+
+module.exports.book = function () {
+    const book1 = {
+        'name': 'Harry Potter',
+        'author': 'J K Rowling',
+        'genre': 'Action',
+        'age_range': 15
+    }
+    return book1;
+}
+
+
 module.exports.abs = absolute;

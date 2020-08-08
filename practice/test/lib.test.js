@@ -15,7 +15,33 @@ describe('absolute', () => {
     })
 })
 
-test('greeting - returns greeting message to the user', () => {
-    const result = lib.greet('nirdesh');
-    expect(result).toBe('hello nirdesh');
+describe('greetings', () => {
+    it('greeting - returns greeting message to the user', () => {
+        const result = lib.greet('nirdesh');
+        expect(result).toBe('hello nirdesh');
+    })
+})
+
+test('return genre of books', () => {
+    const result = lib.genreOfBooks();
+    //expect(result).toEqual(['action', 'romantic', 'comedy', 'thriller']);
+    expect(result).toContain('action');
+})
+
+
+test('returns format of a book', () => {
+    const result = lib.book();
+    /*expect(result).toEqual({
+        'name': 'Harry Potter',
+        'author': 'J K Rowling',
+        'genre': 'Action',
+        'age_range': 15
+    })*/
+    /*expect(result).toMatchObject({
+        'name': 'Harry Potter',
+        'author': 'J K Rowling',
+        'genre': 'Action',
+        'age_range': 15
+    })*/
+    expect(result).toHaveProperty('age_range', 15);
 })

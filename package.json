@@ -1,0 +1,40 @@
+{
+  "name": "bookstore",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/practice/"
+    ]
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nirdeshjha/bookstore.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nirdeshjha/bookstore/issues"
+  },
+  "homepage": "https://github.com/nirdeshjha/bookstore#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "joi": "^17.2.0",
+    "joi-objectid": "^3.0.1",
+    "mongoose": "^5.9.28",
+    "nodemon": "^2.0.4"
+  },
+  "devDependencies": {
+    "jest": "^26.2.2",
+    "supertest": "^4.0.2"
+  }
+}

@@ -2,11 +2,13 @@ const {
     Book,
     validate
 } = require('../models/book');
+const auth = require('../middlewares/auth');
+const admin = require('../middlewares/admin');
 const express = require('express');
 const router = express.Router();
 
 
-router.post('/insert-book', async (req, res) => {
+router.post('/insert-book', auth, async (req, res) => {
     const {
         error
     } = validate(req.body);
@@ -27,7 +29,7 @@ router.post('/insert-book', async (req, res) => {
 })
 
 
-router.get('/all-books', async (req, res) => {
+router.get('/all-books', auth, async (req, res) => {
     if (req.query.number === 'true') {
         const books = await Book.count();
         res.send('books.length: ' + books);
@@ -38,7 +40,7 @@ router.get('/all-books', async (req, res) => {
 })
 
 
-router.get('/', async (req, res) => {
+router.get('/', auth, async (req, res) => {
     if (req.query.genre !== undefined) {
         const result = await Book.find({
             genre: req.query.genre
@@ -68,7 +70,7 @@ router.get('/', async (req, res) => {
     }
 })
 
-router.put('/:id/', async (req, res) => {
+router.put('/:id/', [auth, admin], async (req, res) => {
     const beforeResult = await Book.findById(req.params.id);
     if (beforeResult === null) return res.status(404).send('Books with given id is not found');
 
@@ -105,7 +107,7 @@ router.put('/:id/', async (req, res) => {
     res.send('succesfully updated');
 })
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', [auth, admin], async (req, res) => {
     const result = await Book.findById(req.params.id);
     if (result === null) return res.status(404).send('Books with given id is not found');
 

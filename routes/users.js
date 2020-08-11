@@ -3,10 +3,16 @@ const {
     User
 } = require('../models/user');
 const _ = require('lodash');
+const auth = require('../middlewares/auth');
 const Joi = require('joi');
 const bcrypt = require('bcrypt');
 const express = require('express');
 const router = express.Router();
+
+router.get('/me', auth, async (req, res) => {
+    const user = await User.findById(req.user._id);
+    res.send(_.pick(user, ['_id', 'name', 'email', 'age']));
+})
 
 router.post('/register', async (req, res) => {
     const {

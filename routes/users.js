@@ -9,11 +9,21 @@ const bcrypt = require('bcrypt');
 const express = require('express');
 const router = express.Router();
 
+
+/**
+ * It returns information about the current user.
+ * If user wants to edit any of the information provided that can be done.
+ */
 router.get('/me', auth, async (req, res) => {
     const user = await User.findById(req.user._id);
     res.send(_.pick(user, ['_id', 'name', 'email', 'age']));
 })
 
+
+/**
+ * Returns a token and register him to our service If user provides valid information.
+ *
+ */
 router.post('/register', async (req, res) => {
     const {
         error
@@ -38,6 +48,11 @@ router.post('/register', async (req, res) => {
     res.header('x-auth-token', token).send(_.pick(user, ['_id', 'name', 'email', 'age']));
 })
 
+
+/**
+ * validtes the body send by the client
+ * @param {object} req 
+ */
 const validateSchema = function (req) {
     const schema = Joi.object({
         email: Joi.string().min(7).max(255).required().email(),
@@ -45,6 +60,11 @@ const validateSchema = function (req) {
     })
     return schema.validate(req);
 }
+
+
+/**
+ * Allows the user to login
+ */
 
 router.post('/login', async (req, res) => {
     const {

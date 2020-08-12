@@ -7,7 +7,9 @@ const admin = require('../middlewares/admin');
 const express = require('express');
 const router = express.Router();
 
-
+/**
+ * Allows a valid user to insert a valid book object in DB
+ */
 router.post('/insert-book', auth, async (req, res) => {
     const {
         error
@@ -28,7 +30,9 @@ router.post('/insert-book', auth, async (req, res) => {
 
 })
 
-
+/**
+ * Provides the list of all the book present in the bookstore
+ */
 router.get('/all-books', auth, async (req, res) => {
     if (req.query.number === 'true') {
         const books = await Book.count();
@@ -38,6 +42,10 @@ router.get('/all-books', auth, async (req, res) => {
         res.send(books);
     }
 })
+
+/**
+ * Provides the list of books based on user searches
+ */
 
 
 router.get('/', auth, async (req, res) => {
@@ -70,6 +78,10 @@ router.get('/', auth, async (req, res) => {
     }
 })
 
+
+/**
+ * Allow the admin user to update the book document 
+ */
 router.put('/:id/', [auth, admin], async (req, res) => {
     const beforeResult = await Book.findById(req.params.id);
     if (beforeResult === null) return res.status(404).send('Books with given id is not found');
@@ -106,6 +118,10 @@ router.put('/:id/', [auth, admin], async (req, res) => {
     }
     res.send('succesfully updated');
 })
+
+/**
+ * Allow the admin user to delete a single book document from collection
+ */
 
 router.delete('/:id', [auth, admin], async (req, res) => {
     const result = await Book.findById(req.params.id);

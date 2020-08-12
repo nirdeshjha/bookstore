@@ -10,6 +10,9 @@ const {
 const express = require('express');
 const router = express.Router();
 
+/**
+ * Upadtes the rented model when a book is rented by a user
+ */
 router.post('/:id/rentBook', auth, async (req, res) => {
     const result = await Rented.find({
         bookId: req.params.id
@@ -49,6 +52,10 @@ router.post('/:id/rentBook', auth, async (req, res) => {
     res.send(rent);
 })
 
+/**
+ * Provides list of all rented books by a user
+ */
+
 router.get('/all-rented-books', auth, async (req, res) => {
 
     const result = await Rented.find({
@@ -57,7 +64,9 @@ router.get('/all-rented-books', auth, async (req, res) => {
     res.send(result)
 })
 
-
+/**
+ * Gets total invest by a sepcifc user between start and end date
+ */
 router.get('/total-cost-between/', auth, async (req, res) => {
     const result = await Rented.find({
         userId: req.user._id

@@ -1,7 +1,9 @@
 const Joi = require('joi');
 const mongoose = require('mongoose');
 
-
+/**
+ * Model for renter
+ */
 const Rented = mongoose.model('Rent', new mongoose.Schema({
     userId: {
         type: String,
@@ -23,6 +25,11 @@ const Rented = mongoose.model('Rent', new mongoose.Schema({
         type: Number
     }
 }));
+
+/**
+ * Check for validation of a Rented object
+ * @param {Object} renting 
+ */
 
 module.exports.validate = function validateRenter(renting) {
     const schema = Joi.object({

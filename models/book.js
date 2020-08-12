@@ -1,6 +1,10 @@
 const Joi = require('joi');
 const mongoose = require('mongoose');
 
+/**
+ * Model schema for a book
+ */
+
 const Book = mongoose.model('Books', new mongoose.Schema({
     title: {
         type: String,
@@ -41,6 +45,10 @@ const Book = mongoose.model('Books', new mongoose.Schema({
     }
 }));
 
+/**
+ * Check for validation of a book object
+ * @param {Object} book 
+ */
 function validateBook(book) {
     const schema = Joi.object({
         title: Joi.string().min(5).max(200).required(),

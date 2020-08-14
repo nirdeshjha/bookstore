@@ -2,6 +2,7 @@ const {
     Book
 } = require('../models/book');
 //const User = require('../models/user');
+const asyncMiddleware = require('../middlewares/async');
 const auth = require('../middlewares/auth');
 const {
     validate,
@@ -13,7 +14,7 @@ const router = express.Router();
 /**
  * Upadtes the rented model when a book is rented by a user
  */
-router.post('/:id/rentBook', auth, async (req, res) => {
+router.post('/:id/rentBook', auth, asyncMiddleware(async (req, res) => {
     const result = await Rented.find({
         bookId: req.params.id
     })
@@ -50,24 +51,24 @@ router.post('/:id/rentBook', auth, async (req, res) => {
     })
     await rent.save();
     res.send(rent);
-})
+}))
 
 /**
  * Provides list of all rented books by a user
  */
 
-router.get('/all-rented-books', auth, async (req, res) => {
+router.get('/all-rented-books', auth, asyncMiddleware(async (req, res) => {
 
     const result = await Rented.find({
         userId: req.user._id
     })
     res.send(result)
-})
+}))
 
 /**
  * Gets total invest by a sepcifc user between start and end date
  */
-router.get('/total-cost-between/', auth, async (req, res) => {
+router.get('/total-cost-between/', auth, asyncMiddleware(async (req, res) => {
     const result = await Rented.find({
         userId: req.user._id
     })
@@ -94,7 +95,7 @@ router.get('/total-cost-between/', auth, async (req, res) => {
         total: totalCost
     });
     res.send(estatement);
-})
+}))
 
 
 module.exports = router;

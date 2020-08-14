@@ -2,21 +2,21 @@ const app = require('../index');
 const supertest = require('supertest');
 const request = supertest(app);
 
-describe('POST user information', () => {
-    it('200 success on sending valid information', async done => {
+/*describe('POST', () => {
+    it('200 successfully registered', async done => {
         const res = await request.post('/api/users/register')
             .send({
                 "name": "sunny",
-                "email": "abc@zyxab.com",
-                "passowrd": "123456",
-                "age": 10
+                "email": "abcdefghijk@xyzabc.com",
+                "password": "123456789",
+                "age": 12
             })
             .set('Accept', 'application/json');
         expect(res.status).toBe(200);
         done();
     })
 
-    it('400 error on sending invalid information', async done => {
+    it('400 not registered, invalid information', async done => {
         const res = await request.post('/api/users/register')
             .send({
                 "name": "su",
@@ -29,7 +29,7 @@ describe('POST user information', () => {
         done();
     })
 
-    it('400 success on not having unique email information', async done => {
+    it('400 not registered, emailid is already a member of bookstore', async done => {
         const res = await request.post('/api/users/register')
             .send({
                 "name": "sunny",
@@ -42,14 +42,14 @@ describe('POST user information', () => {
         done();
     })
 
-})
+})*/
 
 describe('POST login information', () => {
     it('200 on sending perfect email and password', async done => {
         const res = await request.post('/api/users/login')
             .send({
-                "email": "abc@zyxab.com",
-                "password": "123456"
+                "email": "abcdefghijk@xyzabc.com",
+                "password": "123456789"
             })
             .set('Accept', 'application/json');
 

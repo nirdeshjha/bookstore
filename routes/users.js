@@ -3,6 +3,7 @@ const {
     User
 } = require('../models/user');
 const _ = require('lodash');
+const asyncMiddleware = require('../middlewares/async');
 const auth = require('../middlewares/auth');
 const Joi = require('joi');
 const bcrypt = require('bcrypt');
@@ -14,17 +15,17 @@ const router = express.Router();
  * It returns information about the current user.
  * If user wants to edit any of the information provided that can be done.
  */
-router.get('/me', auth, async (req, res) => {
+router.get('/me', auth, asyncMiddleware(async (req, res) => {
     const user = await User.findById(req.user._id);
     res.send(_.pick(user, ['_id', 'name', 'email', 'age']));
-})
+}))
 
 
 /**
  * Returns a token and register him to our service If user provides valid information.
  *
  */
-router.post('/register', async (req, res) => {
+router.post('/register', asyncMiddleware(async (req, res) => {
     const {
         error
     } = Validate(req.body);
@@ -46,7 +47,7 @@ router.post('/register', async (req, res) => {
     await user.save();
     const token = user.generateAuthToken();
     res.header('x-auth-token', token).send(_.pick(user, ['_id', 'name', 'email', 'age']));
-})
+}))
 
 
 /**
@@ -66,7 +67,7 @@ const validateSchema = function (req) {
  * Allows the user to login
  */
 
-router.post('/login', async (req, res) => {
+router.post('/login', asyncMiddleware(async (req, res) => {
     const {
         error
     } = validateSchema(req.body);
@@ -82,6 +83,6 @@ router.post('/login', async (req, res) => {
 
     const token = user.generateAuthToken();
     res.send(token);
-})
+}))
 
 module.exports = router;

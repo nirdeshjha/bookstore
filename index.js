@@ -1,4 +1,3 @@
-require('express-async-errors');
 const config = require('config');
 const books = require('./routes/books');
 const users = require('./routes/users');
@@ -6,6 +5,7 @@ const rented = require('./routes/rented');
 const error = require('./middlewares/error');
 const mongoose = require('mongoose');
 const express = require('express');
+require('express-async-errors');
 const app = express();
 
 if (!config.get('jwtPrivateKey')) {

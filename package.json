@@ -14,7 +14,8 @@
     ]
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "generate-docs": "jsdoc -c ./jsdoc.json"
   },
   "repository": {
     "type": "git",

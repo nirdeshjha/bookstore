@@ -9,6 +9,11 @@ const {
     listOfBookHavingBookId
 } = require('../data/books');
 
+/**
+ * 
+ * @param {Object} req 
+ * @returns {string}
+ */
 async function checkForBookWithUser(req) {
     const result = await listContainingBookId(req);
     for (let i = 0; i < result.length; i++) {
@@ -16,6 +21,12 @@ async function checkForBookWithUser(req) {
     }
 }
 
+
+/**
+ * 
+ * @param {Object} req 
+ * @returns {string}
+ */
 async function bookAvailableAfter(req) {
     const book = await listOfBookHavingBookId(req);
     const result = await listContainingBookId(req);
@@ -28,7 +39,11 @@ async function bookAvailableAfter(req) {
         return availableAfter[0];
     }
 }
-
+/**
+ * 
+ * @param {Object} req 
+ * @returns {Object}
+ */
 async function rentBook(req) {
     const rent = new Rented({
         userId: req.user._id,
@@ -40,12 +55,20 @@ async function rentBook(req) {
     await rent.save();
     return rent;
 }
-
+/**
+ * 
+ * @param {Object} req 
+ * @returns {Array}
+ */
 async function rentedBooksByUser(req) {
     const result = await listOfBookRentedByUser(req);
     return result;
 }
-
+/**
+ * 
+ * @param {Object} req 
+ * @returns {Array}
+ */
 async function totalInvestment(req) {
     const result = await listOfBookRentedByUser(req);
     let start = -1,

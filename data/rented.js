@@ -1,7 +1,11 @@
 const {
     Rented
 } = require('../models/renters');
-
+/**
+ * 
+ * @param {Object} req 
+ * @returns {Array}
+ */
 async function listContainingBookId(req) {
     const result = await Rented.find({
         bookId: req.params.id
@@ -9,6 +13,11 @@ async function listContainingBookId(req) {
     return result;
 }
 
+/**
+ * 
+ * @param {Object} req 
+ * @returns {Array}
+ */
 async function listOfBookRentedByUser(req) {
     const result = await Rented.find({
         userId: req.user._id

@@ -16,13 +16,16 @@ const Rented = mongoose.model('Rent', new mongoose.Schema({
         minlength: 24
     },
     rentingDate: {
-        type: String
+        type: String,
+        required: true
     },
     returningDate: {
-        type: String
+        type: String,
+        required: true
     },
     price: {
-        type: Number
+        type: Number,
+        required: true
     }
 }));
 
@@ -35,9 +38,9 @@ module.exports.validate = function validateRenter(renting) {
     const schema = Joi.object({
         userId: Joi.string(),
         bookId: Joi.string(),
-        rentingDate: Joi.string(),
-        returningDate: Joi.string(),
-        price: Joi.number()
+        rentingDate: Joi.string().required(),
+        returningDate: Joi.string().required(),
+        price: Joi.number().required()
     })
     return schema.validate(renting);
 }

@@ -1,0 +1,193 @@
+swagger : '2.0'
+info: 
+  description : 'Bookstore Application'
+  title: 'bookstore'
+  version: 'v1'
+host: 'localhost:3000'
+basePath: '/api'
+tags: 
+- name: 'books'
+  description: 'conatins all infromation about books.'
+- name: 'users'
+  description: 'contains all information about users.'
+- name: 'rented'
+  description: 'contains all information about rents.'
+schemes:
+- 'https'
+- 'http'
+paths:
+  /books/all-books:
+    get:
+      tags:
+      - 'books'
+      summary: 'Get all the books'
+      responses:
+        '200':
+          description: 'Success response'
+      consumes: 
+      - "application/json"
+      produces:
+      - "application/json"
+  /books/insert-book:
+    post:
+      tags:
+      - 'books'
+      summary: 'Allows the admin user to insert a valid book in the bookstore'
+      responses:
+        '200':
+         description: 'Success response on inserting valid book'
+        '400':
+          description: 'Invalid book'
+      consumes:
+      - 'application/json'
+      produces:
+      - 'application/json'
+  /books/:
+    get:
+      tags:
+      - 'books'
+      summary:  'Give list of all the books based on specific search' 
+      description: ''
+      parameters:
+      - name: 'genre'
+        in: 'query'
+        description: 'search list of books having given genres'
+        required: false
+        type: 'string'
+      - name: 'author'
+        in: 'query'
+        description: 'search list of books having given genres'
+        required: false
+        type: 'string'
+      - name: 'title'
+        in: 'query'
+        description: 'search list of books having given genres'
+        required: false
+        type: 'string'
+      responses:
+        200:
+          description: 'Success'
+      consumes:
+      - 'application/json'
+      produces:
+      - 'application/json'
+  /books/{bookId}/:
+    put:
+      tags:
+      - 'books'
+      summary: 'updates the given book'
+      description: ''
+      parameters:
+      - name: 'bookId'
+        in: 'path'
+        description: 'Id of bookd whose  value needs to be updated'
+        required: true
+        type: 'integer'
+      - name: 'cahangeGenre'
+        in: 'query'
+        required: false
+        type: 'string'
+      - name: 'cahangePrice'
+        in: 'query'
+        required: false
+        type: 'string'
+      - name: 'cahangeTitle'
+        in: 'query'
+        required: false
+        type: 'string'
+      consumes:
+      - 'application/json'
+      produces:
+      - 'application/json'
+      responses: 
+        200:
+         description: 'On succesful update'
+        404:
+         description: 'On invalid data'
+  /books/{bookId}:
+    delete:
+      tags:
+      - 'books'
+      parameters:
+      - name: 'bookId'
+        in: 'path'
+        required: true
+        type: 'integer'
+      responses:
+        200:
+          description: 'successful deletion'
+        404:
+          description: 'Invalid bookId'
+  /rented/all-rented-books:
+    get:
+      tags: 
+      - 'rented'
+      summary: 'gives list of all the rented books'
+      description: ''
+      responses:
+        200:
+          description: 'success'
+  /rented/total-cost-between/:
+    get:
+      tags: 
+      - 'rented'
+      summary: 'Gives total investment between start date and end date'
+      description: ''
+      parameters:
+      - name: 'fromDate'
+        in: 'query'
+        type: 'string'
+        required: false
+      - name: 'toDate'
+        in: 'query'
+        type: 'string'
+        required: false
+      responses:
+        200:
+          description: OK
+  /rented/{bookId}/rentBook/:
+    post: 
+      tags: 
+      - 'rented'
+      summary: 'Rent a book to a user'
+      description: ''
+      parameters: 
+      - name: 'bookId'
+        in: 'path'
+        type: 'string'
+        required: true
+      responses:
+        200:
+          description: 'book successfully rented'
+        400:
+          description: 'book cannot be rented for some reason'
+  /user/register/:
+    post:
+      tags:
+      - 'users'
+      summary: 'register a user with our bookstore'
+      description: ''
+      responses:
+        200:
+          description: 'success'
+        400:
+          description: 'on sending inavlid details'
+        
+    
+  /user/login/:
+    post:
+      tags:
+      - 'users'
+      summary: 'allows user to login to our application'
+      description: ''
+      responses:
+        200:
+          description: 'sucess'
+        400:
+          description: 'on sending invalid details'
+        
+    
+       
+      
+  
+    

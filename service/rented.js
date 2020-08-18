@@ -9,6 +9,16 @@ const {
     listOfBookHavingBookId
 } = require('../data/books');
 
+
+class BadRequestError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = 'BadRequestError';
+        this.statusCode = 400;
+    }
+}
+
+
 /**
  * 
  * @param {Object} req 
@@ -17,7 +27,8 @@ const {
 async function checkForBookWithUser(req) {
     const result = await listContainingBookId(req);
     for (let i = 0; i < result.length; i++) {
-        if (result[i].userId === req.user._id) return result[i].returningDate;
+        if (result[i].userId === req.user._id)
+            throw new BadRequestError(`The book is already with you till ${result[i].returningDate}`);
     }
 }
 
@@ -36,7 +47,7 @@ async function bookAvailableAfter(req) {
             returning.push(result[i].returningDate);
         }
         const availableAfter = await returning.sort();
-        return availableAfter[0];
+        throw new BadRequestError(`The given book is available after :${availableAfter[0]}`);
     }
 }
 /**
@@ -96,6 +107,7 @@ async function totalInvestment(req) {
     });
     return estatement;
 }
+
 module.exports.checkForBookWithUser = checkForBookWithUser;
 module.exports.bookAvailableAfter = bookAvailableAfter;
 module.exports.rentBook = rentBook;

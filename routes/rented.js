@@ -19,12 +19,25 @@ const router = express.Router();
  */
 
 router.post('/:id/rentBook', auth, asyncMiddleware(async (req, res) => {
+    const args = {
+        "params": req.params,
+        "body": req.body,
+        "query": req.query,
+        "user._id": req.user._id
+    }
+    console.log(args);
+    try {
+        await checkForBookWithUser(req);
+    } catch (error) {
+        return res.status(error.statusCode).send(error.message);
+    }
 
-    const thisDate = await checkForBookWithUser(req);
-    if (thisDate) return res.status(400).send('The given book is already with you till ' + thisDate);
+    try {
+        await bookAvailableAfter(req);
+    } catch (error) {
+        return res.status(error.statusCode).send(error.message);
+    }
 
-    const availableAfter = await bookAvailableAfter(req);
-    if (availableAfter) return res.status(400).send(`the given book is available after :${availableAfter}`);
 
     const {
         error

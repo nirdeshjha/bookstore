@@ -182,7 +182,7 @@ describe('UPDATE books based on specific query', () => {
         done();
     })
     it('200 on valid Id', async done => {
-        const res = await request.delete('/api/books/5f3638de946d1752393ce8b1')
+        const res = await request.delete('/api/books/5f36398f74a4e1552622423f')
             .set('x-auth-token', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjMwY2UzZjMwMTUxMTIzMTZmY2RiMTQiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE1OTczOTAxNTh9.VjRqO7qnSqTMhFGsTfxHBLModMJPGwSSI-TB7ESAfFk");
 
         expect(res.status).toBe(200);

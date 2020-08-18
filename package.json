@@ -14,7 +14,7 @@
     ]
   },
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage",
     "generate-docs": "jsdoc -c ./jsdoc.json"
   },
   "repository": {

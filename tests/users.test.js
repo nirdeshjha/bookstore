@@ -7,7 +7,7 @@ const request = supertest(app);
         const res = await request.post('/api/users/register')
             .send({
                 "name": "sunny",
-                "email": "abcdefghijk@xyzabc.com",
+                "email": "abcdefghijkl@xyzabcd.com",
                 "password": "123456789",
                 "age": 12
             })

@@ -15,7 +15,7 @@ if (!config.get('jwtPrivateKey')) {
 }
 
 
-mongoose.connect('mongodb://localhost/bookstore')
+mongoose.connect('mongodb://mongo:27017/bookstore')
     .then(() => console.log('connected to MongoDb...'))
     .catch((err) => console.error('Could not connect to MongoDb...'));
 

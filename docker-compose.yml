@@ -1,0 +1,17 @@
+version: "3"
+services:
+  app:
+    container_name: bookstore_app
+    restart: always
+    environment:
+      - bookstoreJwtPrivateKey=myKey
+    build: .
+    ports:
+      - "8080:8000"
+    links:
+      - mongo
+  mongo:
+    container_name: bookstore_db
+    image: mongo
+    ports:
+        - "27018:27017"
